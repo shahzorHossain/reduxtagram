@@ -13,19 +13,29 @@ export default class Comment extends Component {
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
-          <button className="remove-comment">&times;</button>
+          <button
+            className="remove-comment"
+            onClick={() => {
+              this.props.removeComment(this.props.params.postId, i);
+            }}
+          >
+            &times;
+          </button>
         </p>
       </div>
     );
   }
 
   handleSubmit(e) {
+    // will prevent the page from refreshing
     e.preventDefault();
     const { postId } = this.props.params;
     const author = this.refs.author.value;
     const comment = this.refs.comment.value;
     // using our addComment reducer now
     this.props.addComment(postId, author, comment);
+    // resets the comment field after submitting
+    this.refs.commentForm.reset();
   }
 
   render() {
