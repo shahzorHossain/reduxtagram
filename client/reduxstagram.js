@@ -16,6 +16,10 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
 
+// import Sentry
+import { sentry_url } from './data/config';
+import * as Sentry from '@sentry/browser';
+
 /* 
  * if it matches '/' grab the Main component
 
@@ -33,6 +37,27 @@ import store, { history } from './store';
  * Click on the tag, go to console, write $r.store to see the methods
  * If you write $r.store.getState(), you will see the state objects
  */
+
+// Raven.config(sentry_url, {
+//   tags: {
+//     git_commit: 'herhfjhfwj',
+//     userLevel: 'editor'
+//   }
+// }).install();
+
+Sentry.init({
+  dsn: sentry_url
+});
+
+Sentry.configureScope(scope => {
+  scope.setTag('state', 'rjeghjkrnkve');
+  scope.setTag('data', '4534');
+  // Sentry.captureException(new Error('download failed again!'));
+  // Sentry.captureMessage('Something bad happened!');
+  // Sentry.showReportDialog();
+});
+
+// console.log(window.user.uselessFunction);
 
 const router = (
   <Provider store={store}>
