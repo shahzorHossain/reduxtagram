@@ -38,13 +38,6 @@ import * as Sentry from '@sentry/browser';
  * If you write $r.store.getState(), you will see the state objects
  */
 
-// Raven.config(sentry_url, {
-//   tags: {
-//     git_commit: 'herhfjhfwj',
-//     userLevel: 'editor'
-//   }
-// }).install();
-
 Sentry.init({
   dsn: sentry_url
 });
